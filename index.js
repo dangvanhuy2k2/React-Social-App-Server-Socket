@@ -1,7 +1,7 @@
 console.log('Server Socket running')
 const axios = require("axios");
-const URL_BE = 'https://codernoob-sv-be.onrender.com'
-axios.defaults.baseURL = URL_BE + "/v1/api";
+const URL_BE = 'https://codernoob-be.onrender.com/'
+axios.defaults.baseURL = URL_BE + "v1/api";
 require("dotenv").config();
 
 
@@ -215,7 +215,8 @@ io.on("connection", (socket) => {
     });
 
     socket.on("createPost", ({ dataEmit }) => {
-        const datas = dataEmit.map((notification) => notification.receiverId);
+
+        const datas = dataEmit.map((notification) => notification?.receiverId);
         const userReceivers = findUsers((user) => datas.includes(user));
 
         if (userReceivers.length) {
